@@ -1,6 +1,9 @@
 using API.Data;
 using API.Data.SeedData;
+using API.Extentions;
+using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +15,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddApplicationServices();
+
 builder.Services.AddDbContext<StoreContext> (options => 
         options.UseNpgsql(builder.Configuration.GetConnectionString ("DefaultConnection")));
 
-builder.Services.AddScoped<IProductRepository, ProductRepository> ();
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
@@ -28,9 +33,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 using (var scope = app.Services.CreateScope())
 {

@@ -3,7 +3,7 @@
         "Name": "Angular habijabi",
         "Description": "Angular habijabi ajasdh asuidh asudh asadh  ashd sadh asidh sd",
         "Price": 200,
-        "PictureUrl": "http://imag1",
+        "PictureUrl": "images/products/img1.jpg",
         "ProdctTypeId": 1, 
         "ProdctBrandId": 1
     },
@@ -11,7 +11,7 @@
         "Name": "React habijabi",
         "Description": "React habijabi ajasdh asuidh asudh asadh  ashd sadh asidh sd",
         "Price": 400,
-        "PictureUrl": "http://imag2",
+        "PictureUrl": "images/products/img3.jpg",
         "ProdctTypeId": 2, 
         "ProdctBrandId": 2
     }
