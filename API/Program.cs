@@ -1,4 +1,6 @@
 using API.Data;
+using API.Data.SeedData;
+using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<StoreContext> (options => 
         options.UseNpgsql(builder.Configuration.GetConnectionString ("DefaultConnection")));
+
+builder.Services.AddScoped<IProductRepository, ProductRepository> ();
 
 var app = builder.Build();
 
@@ -27,5 +31,20 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    try {
+        var context = services.GetRequiredService<StoreContext>();
+        await context.Database.MigrateAsync();
+        
+        await StoreContextSeed.SeedAsync(context, loggerFactory);
+    } catch (Exception ex) {
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError (ex, "An error occured during migrations");
+    }
+}
 
 app.Run();

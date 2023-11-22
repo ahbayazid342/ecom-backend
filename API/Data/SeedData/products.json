@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "Angular habijabi",
+        "Description": "Angular habijabi ajasdh asuidh asudh asadh  ashd sadh asidh sd",
+        "Price": 200,
+        "PictureUrl": "http://imag1",
+        "ProdctTypeId": 1, 
+        "ProdctBrandId": 1
+    },
+    {
+        "Name": "React habijabi",
+        "Description": "React habijabi ajasdh asuidh asudh asadh  ashd sadh asidh sd",
+        "Price": 400,
+        "PictureUrl": "http://imag2",
+        "ProdctTypeId": 2, 
+        "ProdctBrandId": 2
+    }
+]
